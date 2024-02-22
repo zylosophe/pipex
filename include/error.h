@@ -6,7 +6,7 @@
 /*   By: mcolonna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 17:30:36 by mcolonna          #+#    #+#             */
-/*   Updated: 2024/02/21 16:09:30 by mcolonna         ###   ########.fr       */
+/*   Updated: 2024/02/22 14:08:51 by mcolonna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 void		err(t_const_string msg);
 t_memclass	get_mc(void);
-void		startprogram(void);
+void		startprogram(t_const_string argv0);
 void		errorandstop(t_const_string what);
 void		endprogram(int no);
 

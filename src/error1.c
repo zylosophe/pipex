@@ -6,7 +6,7 @@
 /*   By: mcolonna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 17:30:26 by mcolonna          #+#    #+#             */
-/*   Updated: 2024/02/21 16:06:29 by mcolonna         ###   ########.fr       */
+/*   Updated: 2024/02/22 14:24:01 by mcolonna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,16 @@
 #include <stdlib.h>
 #include "libtf.h"
 #include "error.h"
+
+static t_const_string	pop_argv0(t_const_string new)
+{
+	static t_const_string	value = NULL;
+	t_const_string			r;
+
+	r = value;
+	value = new;
+	return (r);
+}
 
 static t_memclass	pop_mc(t_memclass new)
 {
@@ -35,23 +45,16 @@ t_memclass	get_mc(void)
 	return (r);
 }
 
-void	errorandstop(const char *what)
+void	err(t_const_string msg)
 {
-	perror(what);
-	endprogram(errno);
+	(void)msg;
+	if (!errno)
+		errno = 1;
+	errorandstop(pop_argv0(NULL));
 }
 
-void	startprogram(void)
+void	startprogram(t_const_string argv0)
 {
+	pop_argv0(argv0);
 	pop_mc(mem_newclass(err));
-}
-
-void	endprogram(int no)
-{
-	t_memclass	mc;
-
-	mc = pop_mc(NULL);
-	if (mc)
-		mem_freeall(mc);
-	exit(no);
 }
