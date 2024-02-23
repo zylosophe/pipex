@@ -2,7 +2,7 @@
 NAME = pipex
 SRCS = src/
 INCLUDES = include/ libtf/
-CODE = main error1 error2 execsubprocess execcommand execfrompath
+CODE = main error1 error2 execsubprocess execcommand execfrompath heredoc
 LIBRARIES_DIRS = libtf/
 LIBRARIES_FILES = libtf/libtf.a
 
