@@ -6,7 +6,7 @@
 /*   By: mcolonna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 11:19:19 by mcolonna          #+#    #+#             */
-/*   Updated: 2024/02/23 15:44:14 by mcolonna         ###   ########.fr       */
+/*   Updated: 2024/02/23 16:33:42 by mcolonna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ void	heredoc(int *readfd, t_const_string eof)
 	{
 		mem_free((void *)line);
 		print_str(err, 1, "( ^,^)> ");
-		line = read_line(err_remember, get_mc(), 0);
+		line = NULL;
+		while (!line)
+			line = read_line(err_remember, get_mc(), 0);
 		catcherror(outpipe[1], err_get());
-		if (!line)
-			continue ;
 		if (str_eq(line, eof) || str_eq(line, eof_line))
 			break ;
 		print_str(err_remember, outpipe[1], line);
