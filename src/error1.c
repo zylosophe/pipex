@@ -6,7 +6,7 @@
 /*   By: mcolonna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 17:30:26 by mcolonna          #+#    #+#             */
-/*   Updated: 2024/02/23 16:05:48 by mcolonna         ###   ########.fr       */
+/*   Updated: 2024/02/23 16:49:42 by mcolonna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 #include <stdlib.h>
 #include "libtf.h"
 #include "error.h"
-
-bool	g_err_commandnotfound;
 
 static t_const_string	pop_argv0(t_const_string new)
 {
@@ -57,7 +55,6 @@ void	err(t_const_string msg)
 
 void	startprogram(t_const_string argv0)
 {
-	g_err_commandnotfound = false;
 	pop_argv0(argv0);
 	pop_mc(mem_newclass(err));
 }

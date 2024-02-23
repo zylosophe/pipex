@@ -6,7 +6,7 @@
 /*   By: mcolonna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 12:10:25 by mcolonna          #+#    #+#             */
-/*   Updated: 2024/02/23 16:27:15 by mcolonna         ###   ########.fr       */
+/*   Updated: 2024/02/23 16:50:22 by mcolonna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,5 @@ void	execfrompath(t_string argv[], t_const_string envp[])
 		}
 	}
 	mem_freeall(mc);
-	g_err_commandnotfound = true;
-	errorandstop(argv[0]);
+	err_commandnotfound(argv[0]);
 }

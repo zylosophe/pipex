@@ -6,7 +6,7 @@
 /*   By: mcolonna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 17:10:55 by mcolonna          #+#    #+#             */
-/*   Updated: 2024/02/23 16:18:50 by mcolonna         ###   ########.fr       */
+/*   Updated: 2024/02/23 16:47:36 by mcolonna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,15 @@
 #include "libtf.h"
 #include "error.h"
 
+void	err_commandnotfound(t_const_string what)
+{
+	print_line(err, 2, str_join(err, get_mc(), what, ": command not found"));
+	endprogram(127);
+}
+
 void	errorandstop(t_const_string what)
 {
-	if (g_err_commandnotfound)
-	{
-		g_err_commandnotfound = false;
-		print_line(err, 2,
-				str_join(err, get_mc(), what, ": command not found"));
-	}
-	else
-		perror(what);
+	perror(what);
 	endprogram(errno);
 }
 

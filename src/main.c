@@ -6,7 +6,7 @@
 /*   By: mcolonna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:34:55 by mcolonna          #+#    #+#             */
-/*   Updated: 2024/02/23 15:38:40 by mcolonna         ###   ########.fr       */
+/*   Updated: 2024/02/23 16:45:33 by mcolonna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,11 @@ static t_pipe	*create_pipes(
 {
 	t_pipe	*r;
 	int		i;
+	int		wfile_flag;
 
+	wfile_flag = O_TRUNC;
+	if (is_heredoc)
+		wfile_flag = O_APPEND;
 	r = mem_alloc(err, get_mc(), (size) * sizeof(t_pipe));
 	if (is_heredoc)
 		heredoc(&r[0][0], rfile);
@@ -37,7 +41,7 @@ static t_pipe	*create_pipes(
 	while (++i < size - 1)
 		if (pipe(r[i]) == -1)
 			err(NULL);
-	r[i][1] = open(wfile, O_WRONLY | O_CREAT | O_TRUNC, 0666);
+	r[i][1] = open(wfile, O_WRONLY | O_CREAT | wfile_flag, 0666);
 	if (r[i][1] == -1)
 		errorandstop(wfile);
 	return (r);
@@ -66,10 +70,11 @@ int	main(int argc, t_const_string argv[], t_const_string envp[])
 		endprogram(1);
 	}
 	pipes = create_pipes(
-		is_heredoc, size_pipes, argv[1 + is_heredoc], argv[argc - 1]);
+			is_heredoc, size_pipes, argv[1 + is_heredoc], argv[argc - 1]);
 	i = -1;
 	while (++i < nb_subprocess)
-		execcommand(pipes[i][0], pipes[i + 1][1], argv[i + 2 + is_heredoc], envp);
+		execcommand(
+			pipes[i][0], pipes[i + 1][1], argv[i + 2 + is_heredoc], envp);
 	while (wait(NULL) != -1)
 		;
 	if (errno != ECHILD)
