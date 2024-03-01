@@ -6,7 +6,7 @@
 /*   By: mcolonna <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:34:55 by mcolonna          #+#    #+#             */
-/*   Updated: 2024/02/23 16:45:33 by mcolonna         ###   ########.fr       */
+/*   Updated: 2024/03/01 11:32:02 by mcolonna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	main(int argc, t_const_string argv[], t_const_string envp[])
 {
 	t_pipe		*pipes;
 	int			i;
-	const int	is_heredoc = booltoint(str_eq(argv[1], "here_doc"));
+	const int	is_heredoc = booltoint(argc > 1 && str_eq(argv[1], "here_doc"));
 	const int	size_pipes = argc - 2 - is_heredoc;
 	const int	nb_subprocess = argc - 3 - is_heredoc;
 
